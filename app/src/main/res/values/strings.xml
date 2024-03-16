@@ -14,5 +14,7 @@
     <string name="loginbtn">Login</string>
     <string name="fname">firstname</string>
     <string name="lname">lastname</string>
-
+    <string name="SetlocationBtn">set location</string>
+    <string name="add_imagebtn">add image</string>
+    <string name="createuseractivityl">Create User</string>
 </resources>

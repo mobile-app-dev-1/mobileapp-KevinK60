@@ -8,6 +8,7 @@ import timber.log.Timber
 class MainApp : Application() {
 
     val users = userMemStore()
+    val mainApp = applicationContext as MainApp
 
     override fun onCreate() {
         super.onCreate()
