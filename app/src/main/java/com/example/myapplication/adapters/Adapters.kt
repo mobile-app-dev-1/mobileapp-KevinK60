@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.setu.placemark.databinding.CardPlacemarkBinding
-import ie.setu.placemark.models.PlacemarkModel
+import com.example.myapplication.models.User
+import com.example.myapplication.models.UsersStore
 
 interface PlacemarkListener {
-    fun onPlacemarkClick(placemark: PlacemarkModel)
+    fun onPlacemarkClick(user: UsersStore)
 }
 
-class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
+class PlacemarkAdapter constructor(private var users: List<UsersStore>,
                                    private val listener: PlacemarkListener) :
     RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
 
@@ -22,20 +23,20 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val placemark = placemarks[holder.adapterPosition]
+        val placemark = users[holder.adapterPosition]
         holder.bind(placemark, listener)
     }
 
-    override fun getItemCount(): Int = placemarks.size
+    override fun getItemCount(): Int = users.size
 
     class MainHolder(private val binding : CardPlacemarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
-            binding.placemarkTitle.text = placemark.title
+        fun bind(user: UsersStore, listener: PlacemarkListener) {
+            binding.placemarkTitle.text = user.title
             binding.placemarkDescription.text = placemark.description
-            Picasso.get().load(placemark.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onPlacemarkClick(placemark)}
+            Picasso.get().load(user.image).resize(200,200).into(binding.imageIcon)
+            binding.root.setOnClickListener { listener.onPlacemarkClick(user)}
         }
     }
 }

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class User(
+data class UserModel(
     var id: Long = 0,
     var firstname: String = "",
     var lastname: String = "",
@@ -13,7 +13,8 @@ data class User(
 ) : Parcelable
 
 
-@kotlinx.parcelize.Parcelize
+@Parcelize
 data class Location(var lat: Double = 0.0,
                     var lng: Double = 0.0,
-                    var zoom: Float = 0f) : Parcelable
+                    var zoom: Float = 0f)
+    : Parcelable
