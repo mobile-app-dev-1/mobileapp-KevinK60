@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">User</string>
+
+
+    <!-- Button Text Strings -->
+    <string name="button_addUser">Add User</string>
+    <string name="save_User">Save User</string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="change_User_image">Change User image</string>
+    <string name="button_location">Set Location</string>
+
+    <!-- Notification Strings -->
+    <string name="User_activity_started">User Activity started…</string>
+    <string name="User_add_cancelled">User Add Cancelled</string>
+    <string name="enter_User_title">Please Enter a User Title</string>
+    <string name="select_User_image">Select User image</string>
+
+    <!-- Menu Strings -->
+    <string name="menu_addUser">Add</string>
+    <string name="menu_cancelUser">Cancel</string>
+
+    <!-- Hint Strings -->
+    <string name="hint_UserTitle">User Title</string>
+    <string name="hint_UserDescription">Description </string>
+
+    <!-- Map Strings -->
+    <string name="title_activity_map">MapActivity</string>
+</resources>
