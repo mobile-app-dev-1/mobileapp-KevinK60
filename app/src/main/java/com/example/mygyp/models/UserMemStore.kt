@@ -1,13 +1,17 @@
 package com.example.mygyp.models
 
+import timber.log.Timber
 import timber.log.Timber.i
 
 var lastId = 0L
-internal fun getId() = lastId++
 
-class PlacemarkMemStore : UserStore {
+internal fun getId(): Long {
+    return lastId++
+}
 
-    val users  = ArrayList<UserModel>()
+class UserMemStore : UserStore {
+
+    val users = ArrayList<UserModel>()
 
     override fun findAll(): List<UserModel> {
         return users
@@ -19,13 +23,28 @@ class PlacemarkMemStore : UserStore {
         logAll()
     }
 
-    override fun update(placemark: UserModel) {
-        var foundPlacemark: UserModel? = users.find { p -> p.id == placemark.id }
-        if (foundPlacemark != null) {
-            foundPlacemark.firstname = placemark.firstname
-            foundPlacemark.lastname = placemark.lastname
-            foundPlacemark.image = placemark.image
+    override fun update(user: UserModel) {
+        val foundUser: UserModel? = users.find { it.id == user.id }
+        if (foundUser != null) {
+            foundUser.firstname = user.firstname
+            foundUser.lastname = user.lastname
+            foundUser.image = user.image
             logAll()
+        }
+    }
+
+    override fun delete(user: UserModel) {
+       users.remove(user)
+    }
+
+    fun deletebyid(userId: Long) {
+        val userToRemove = users.find { it.id == userId }
+        if (userToRemove != null) {
+            users.remove(userToRemove)
+            logAll()
+        } else {
+            // Handle case when user with specified ID is not found
+            Timber.e("User with ID $userId not found.")
         }
     }
 

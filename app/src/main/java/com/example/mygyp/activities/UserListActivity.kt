@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mygyp.R
 import com.example.mygyp.adapters.UserAdapter
 import com.example.mygyp.databinding.ActivityPlacemarkListBinding
@@ -15,7 +17,6 @@ import com.example.mygyp.main.MainApp
 import com.example.mygyp.models.UserModel
 import com.google.android.material.snackbar.Snackbar
 import com.example.mygyp.adapters.UserListener
-
 
 
 class UserListActivity : AppCompatActivity(), UserListener {
@@ -32,7 +33,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = UserAdapter(app.placemarks.findAll(), this)
+        binding.recyclerView.adapter = UserAdapter(app.users.findAll(), this)
 
         binding.topAppBar.title = title  //Name of the Project
         setSupportActionBar(binding.topAppBar)
@@ -60,7 +61,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.notifyItemRangeChanged(
                     0,
-                    app.placemarks.findAll().size
+                    app.users.findAll().size
                 )
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
@@ -69,6 +70,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
             }
         }
 
+
     override fun onuserClick(user: UserModel) {
         val launcherIntent = Intent(this, UserActivity::class.java)
         launcherIntent.putExtra("placemark_edit", user)
@@ -76,6 +78,10 @@ class UserListActivity : AppCompatActivity(), UserListener {
     }
 
     override fun onUserClick(user: UserModel) {
+
+    }
+
+    override fun removeItem(user: UserModel) {
 
     }
 

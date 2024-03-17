@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso
 interface UserListener {
     fun onuserClick(user: UserModel)
     fun onUserClick(user: UserModel)
+    fun removeItem(user: UserModel)
 }
 
 class UserAdapter constructor(private var users: List<UserModel>,
@@ -34,9 +35,10 @@ class UserAdapter constructor(private var users: List<UserModel>,
 
         fun bind(user: UserModel, listener: UserListener) {
             binding.placemarkTitle.text = user.firstname
-            binding.placemarkDescription.text = user.lastname
+            binding.placemarkTitle.text = user.lastname
             Picasso.get().load(user.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onuserClick(user)}
         }
     }
+
 }

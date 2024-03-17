@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import com.example.mygyp.R
 import com.example.mygyp.helpers.showImagePicker
 import com.example.mygyp.databinding.ActivityPlacemarkBinding
@@ -43,6 +44,20 @@ class UserActivity : AppCompatActivity() {
 
         i(getString(R.string.User_activity_started))
 
+        binding.deletebutton.setOnClickListener {
+
+            val confirmationDialog = AlertDialog.Builder(this)
+                .setTitle("Delete User")
+                .setMessage("do u want to delete this ${user.id}?")
+                .setPositiveButton("Delete") { dialog, which ->
+                    app.users.deletebyid(user.id)
+                    finish()
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+            confirmationDialog.show()
+        }
+
         if (intent.hasExtra("placemark_edit")) {
             edit = true
             user = intent.extras?.getParcelable("placemark_edit")!!
@@ -63,10 +78,10 @@ class UserActivity : AppCompatActivity() {
             user.lastname = binding.placemarkDescription.text.toString()
             if (user.firstname.isNotEmpty()) {
                 if (edit) {
-                    app.placemarks.update(user.copy())
+                    app.users.update(user.copy())
                 }
                 else{
-                    app.placemarks.create(user.copy())
+                    app.users.create(user.copy())
                 }
                 setResult(RESULT_OK)
                 finish()
@@ -88,7 +103,9 @@ class UserActivity : AppCompatActivity() {
             mapIntentLauncher.launch(launcherIntent)
         }
         registerMapCallback()
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_placemark, menu)

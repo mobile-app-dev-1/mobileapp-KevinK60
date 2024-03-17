@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,26 +23,34 @@
             android:contentDescription="@string/change_User_image" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="156dp"
+            android:layout_height="113dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/placemarkTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="108dp"
+                android:layout_height="46dp"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 tools:text="A Title" />
 
-            <TextView
-                android:id="@+id/placemarkDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                tools:text="A Description" />
+
 
         </LinearLayout>
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkbox"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="65dp"-->
+<!--            android:text="" />-->
+
+        <Button
+            android:id="@+id/deletebutton"
+            android:layout_width="4dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onDeleteButtonClick" />/>
 
     </LinearLayout>
 

@@ -25,4 +25,5 @@
 
     <!-- Map Strings -->
     <string name="title_activity_map">MapActivity</string>
+    <string name="onDeleteButtonClick">delete</string>
 </resources>
