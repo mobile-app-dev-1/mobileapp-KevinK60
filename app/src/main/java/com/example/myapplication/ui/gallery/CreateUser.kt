@@ -1,14 +1,3 @@
-package com.example.myapplication.ui.gallery
-
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.databinding.FragmentCreateruserBinding
-
 class UserCreationFragment : Fragment() {
 
     private var _binding: FragmentCreateruserBinding? = null
@@ -21,10 +10,29 @@ class UserCreationFragment : Fragment() {
         _binding = FragmentCreateruserBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        val createUserModel: CreateUserModel = ViewModelProvider(this).get(CreateUserModel::class.java)
-        createUserModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+
+
+        binding.btnAddUser.setOnClickListener {
+            val user = UserModel().apply {
+                firstname = binding.firstnameid.text.toString()
+                lastname = binding.lastnameid.text.toString()
+            }
+
+            if (user.firstname.isNotEmpty()) {
+                val mainActivity = requireActivity() as? MainActivity
+                mainActivity?.let {
+                    if (edit) {
+                        it.updateUser(user.copy())
+                    } else {
+                        it.createUser(user.copy())
+                        i(user.toString())
+                    }
+                    it.setResult(Activity.RESULT_OK)
+                    it.finish()
+                }
+            } else {
+                // Handle the case where firstname is empty
+            }
         }
 
         return root

@@ -17,4 +17,5 @@
     <string name="SetlocationBtn">set location</string>
     <string name="add_imagebtn">add image</string>
     <string name="createuseractivityl">Create User</string>
+    <string name="user_profile_image">img</string>
 </resources>
