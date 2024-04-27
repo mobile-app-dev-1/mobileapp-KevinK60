@@ -26,7 +26,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -46,7 +46,6 @@ android {
 
         implementation("androidx.core:core-ktx:1.12.0")
         implementation("androidx.appcompat:appcompat:1.6.1")
-        implementation("com.google.android.material:material:1.11.0")
         implementation("androidx.constraintlayout:constraintlayout:2.1.4")
         implementation("com.google.android.gms:play-services-maps:18.1.0")
         testImplementation("junit:junit:4.13.2")
@@ -54,10 +53,17 @@ android {
         androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
         // For logging
         implementation("com.github.ajalt:timberkt:1.5.1")
-        //For Image downloading and caching
+        // For Image downloading and caching
         implementation("com.squareup.picasso:picasso:2.71828")
+        implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.6.10")
+        implementation("com.google.android.material:material:1.11.0")
+
     }
 }
 dependencies {
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.material)
+
 }

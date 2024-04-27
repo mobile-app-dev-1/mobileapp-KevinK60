@@ -2,25 +2,22 @@ package com.example.mygyp.activities
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.Snackbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mygyp.R
 import com.example.mygyp.adapters.UserAdapter
+import com.example.mygyp.adapters.UserListener
 import com.example.mygyp.databinding.ActivityPlacemarkListBinding
 import com.example.mygyp.main.MainApp
 import com.example.mygyp.models.UserModel
 import com.google.android.material.snackbar.Snackbar
-import com.example.mygyp.adapters.UserListener
-
 
 class UserListActivity : AppCompatActivity(), UserListener {
-
     lateinit var app: MainApp
     private lateinit var binding: ActivityPlacemarkListBinding
 
@@ -35,7 +32,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = UserAdapter(app.users.findAll(), this)
 
-        binding.topAppBar.title = title  //Name of the Project
+        binding.topAppBar.title = title // Name of the Project
         setSupportActionBar(binding.topAppBar)
     }
 
@@ -56,20 +53,22 @@ class UserListActivity : AppCompatActivity(), UserListener {
 
     private val getResult =
         registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+            ActivityResultContracts.StartActivityForResult(),
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.notifyItemRangeChanged(
                     0,
-                    app.users.findAll().size
+                    app.users.findAll().size,
                 )
             }
             if (it.resultCode == Activity.RESULT_CANCELED) {
-                Snackbar.make(binding.root,
-                    getString(R.string.enter_User_title), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.enter_User_title),
+                    Snackbar.LENGTH_LONG,
+                ).show()
             }
         }
-
 
     override fun onuserClick(user: UserModel) {
         val launcherIntent = Intent(this, UserActivity::class.java)
@@ -78,16 +77,8 @@ class UserListActivity : AppCompatActivity(), UserListener {
     }
 
     override fun onUserClick(user: UserModel) {
-
     }
 
     override fun removeItem(user: UserModel) {
-
     }
-
-
 }
-
-
-
-
