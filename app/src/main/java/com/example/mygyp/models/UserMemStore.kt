@@ -1,6 +1,5 @@
 package com.example.mygyp.models
 
-import timber.log.Timber
 import timber.log.Timber.i
 
 var lastId = 0L
@@ -10,7 +9,6 @@ internal fun getId(): Long {
 }
 
 class UserMemStore : UserStore {
-
     val users = ArrayList<UserModel>()
 
     override fun findAll(): List<UserModel> {
@@ -34,7 +32,7 @@ class UserMemStore : UserStore {
     }
 
     override fun delete(user: UserModel) {
-       users.remove(user)
+        users.remove(user)
     }
 
     fun deletebyid(userId: Long) {
@@ -43,8 +41,7 @@ class UserMemStore : UserStore {
             users.remove(userToRemove)
             logAll()
         } else {
-            // Handle case when user with specified ID is not found
-            Timber.e("User with ID $userId not found.")
+            i("User with ID $userId not found.")
         }
     }
 
