@@ -9,4 +9,5 @@ interface UserStore {
 
     fun delete(user: UserModel)
     fun findById(id: Long): UserModel?
+
 }
