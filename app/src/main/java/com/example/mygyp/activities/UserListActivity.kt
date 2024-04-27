@@ -21,6 +21,18 @@ class UserListActivity : AppCompatActivity(), UserListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityPlacemarkListBinding
 
+
+    /**
+     * Called when the activity is starting. This is where most initialization should go:
+     * calling setContentView(int) to inflate the activity's UI, using findViewById(int)
+     * to programmatically interact with widgets in the UI, and calling
+     * [AppCompatActivity.setSupportActionBar] to set up the app bar.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [AppCompatActivity.onSaveInstanceState].
+     *     Note: Otherwise, it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
@@ -35,12 +47,23 @@ class UserListActivity : AppCompatActivity(), UserListener {
         binding.topAppBar.title = title // Name of the Project
         setSupportActionBar(binding.topAppBar)
     }
-
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed;
+     *     if you return false it will not be shown.
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_maion, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
+    /**
+     * Handle menu item clicks.
+     *
+     * @param item The menu item that was selected.
+     * @return true if the menu item was handled successfully, false otherwise.
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
@@ -50,7 +73,11 @@ class UserListActivity : AppCompatActivity(), UserListener {
         }
         return super.onOptionsItemSelected(item)
     }
-
+    /**
+     * Activity result launcher for handling results from starting activities for result.
+     * This will be triggered when the activity launched by [registerForActivityResult]
+     * finishes and returns a result.
+     */
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
@@ -69,6 +96,11 @@ class UserListActivity : AppCompatActivity(), UserListener {
                 ).show()
             }
         }
+    /**
+     * Handles the click event when a user item is clicked.
+     *
+     * @param user The user model associated with the clicked item.
+     */
 
     override fun onuserClick(user: UserModel) {
         val launcherIntent = Intent(this, UserActivity::class.java)
