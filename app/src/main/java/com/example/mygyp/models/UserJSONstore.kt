@@ -27,7 +27,7 @@ class UserJSONStore(private val context: Context) : UserStore {
         }
     }
 
-    override fun findAll(): MutableList<UserModel> {
+    override suspend fun findAll(): MutableList<UserModel> {
         logAll()
         return users
     }
@@ -43,16 +43,14 @@ class UserJSONStore(private val context: Context) : UserStore {
         serialize()
     }
 
-    override fun update(user: UserModel) {
+    override suspend fun update(user: UserModel) {
         val usersList = findAll() as ArrayList<UserModel>
         val foundUser: UserModel? = usersList.find { p -> p.id == user.id }
         if (foundUser != null) {
             foundUser.firstname = user.firstname
             foundUser.lastname = user.lastname
             foundUser.image = user.image
-//            foundUser.lat = user.lat
-//            foundUser.lng = user.lng
-//            foundUser.zoom = user.zoom
+
         }
         serialize()
     }

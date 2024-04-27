@@ -1,13 +1,16 @@
 package com.example.mygyp.activities
 
+import UserFirebaseStore
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Snackbar
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mygyp.R
 import com.example.mygyp.adapters.UserAdapter
@@ -16,6 +19,7 @@ import com.example.mygyp.databinding.ActivityPlacemarkListBinding
 import com.example.mygyp.main.MainApp
 import com.example.mygyp.models.UserModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.auth.User
 
 class UserListActivity : AppCompatActivity(), UserListener {
     lateinit var app: MainApp
@@ -33,20 +37,25 @@ class UserListActivity : AppCompatActivity(), UserListener {
      *     recently supplied in [AppCompatActivity.onSaveInstanceState].
      *     Note: Otherwise, it is null.
      */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    class UserListActivity : AppCompatActivity(), UserListener {
+        private lateinit var app: MainApp
+        private lateinit var binding: ActivityPlacemarkListBinding
+        private lateinit var userStore: UserFirebaseStore
 
-        app = application as MainApp
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+            userStore = UserFirebaseStore()
+            app = application as MainApp
 
-        val layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = UserAdapter(app.users.findAll(), this)
+            val layoutManager = LinearLayoutManager(this)
+            binding.recyclerView.layoutManager = layoutManager
+            binding.recyclerView.adapter = UserAdapter(app.users.findAll(), this)
 
-        binding.topAppBar.title = title // Name of the Project
-        setSupportActionBar(binding.topAppBar)
-    }
+            binding.topAppBar.title = title // Name of the Project
+            setSupportActionBar(binding.topAppBar)
+        }
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -112,5 +121,6 @@ class UserListActivity : AppCompatActivity(), UserListener {
     }
 
     override fun removeItem(user: UserModel) {
+
     }
 }

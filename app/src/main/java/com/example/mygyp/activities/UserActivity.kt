@@ -165,7 +165,7 @@ class UserActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            user.image = result.data!!.data!!
+                            Picasso.get().load(user.image).into(binding.placemarkImage)
                             Picasso.get()
                                 .load(user.image)
                                 .into(binding.placemarkImage)

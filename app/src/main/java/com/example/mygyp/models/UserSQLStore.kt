@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.net.toUri
 import timber.log.Timber
 import android.content.ContentValues
+import com.google.firebase.firestore.FirebaseFirestore
+
 private const val DATABASE_NAME = "users.db"
 private const val TABLE_NAME = "users"
 private const val COLUMN_ID = "id"
@@ -15,7 +17,6 @@ private const val COLUMN_IMAGE = "image"
 
 
 class UserSQLStore(private val context: Context) : UserStore {
-
     private var database: SQLiteDatabase
 
     init {
@@ -23,7 +24,7 @@ class UserSQLStore(private val context: Context) : UserStore {
         database = UserDbHelper(context).writableDatabase
     }
 
-    override fun findAll(): List<UserModel> {
+    override suspend fun findAll(): List<UserModel> {
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = database.rawQuery(query, null)
 
@@ -87,7 +88,7 @@ class UserSQLStore(private val context: Context) : UserStore {
     }
 
 
-    override fun update(user: UserModel) {
+    override suspend fun update(user: UserModel) {
         val contentValues = ContentValues().apply {
             put(COLUMN_TITLE, user.firstname)
             put(COLUMN_DESCRIPTION, user.lastname)
@@ -130,6 +131,6 @@ private class UserDbHelper(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Handle database schema upgrades if needed
+
     }
 }
