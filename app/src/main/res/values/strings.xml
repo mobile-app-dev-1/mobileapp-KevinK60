@@ -26,4 +26,7 @@
     <!-- Map Strings -->
     <string name="title_activity_map">MapActivity</string>
     <string name="onDeleteButtonClick">delete</string>
+    <string name="back">back</string>
+    <string name="nightmode">back</string>
+    <string name="setting">setting</string>
 </resources>

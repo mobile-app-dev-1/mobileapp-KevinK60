@@ -3,7 +3,6 @@ import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-
 /**
  * Represents a user model.
  *
@@ -17,7 +16,7 @@ data class UserModel(
     var id: Long = 0,
     var firstname: String = "",
     var lastname: String = "",
-    var image: Uri = Uri.EMPTY,
+    var image: Uri? = Uri.EMPTY,
 ) : Parcelable
 
 /**
@@ -33,6 +32,7 @@ data class Location(
     var lng: Double = 0.0,
     var zoom: Float = 0f,
 ) : Parcelable
+
 /**
  * Represents a day of the week.
  *
@@ -41,6 +41,7 @@ data class Location(
 data class Day(
     val name: String,
 )
+
 /**
  * Represents an hour of the day.
  *

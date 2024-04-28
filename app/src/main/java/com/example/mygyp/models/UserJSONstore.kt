@@ -10,15 +10,17 @@ import java.lang.reflect.Type
 import java.util.*
 
 const val JSON_FILE = "users.json"
-val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
-    .registerTypeAdapter(Uri::class.java, UserJSONStore.UriParser())
-    .create()
+val gsonBuilder: Gson =
+    GsonBuilder().setPrettyPrinting()
+        .registerTypeAdapter(Uri::class.java, UserJSONStore.UriParser())
+        .create()
 val listType: Type = object : TypeToken<ArrayList<UserModel>>() {}.type
+
 fun generateRandomId(): Long {
     return Random().nextLong()
 }
-class UserJSONStore(private val context: Context) : UserStore {
 
+class UserJSONStore(private val context: Context) : UserStore {
     var users = mutableListOf<UserModel>()
 
     init {
@@ -27,12 +29,12 @@ class UserJSONStore(private val context: Context) : UserStore {
         }
     }
 
-    override  fun findAll(): MutableList<UserModel> {
+    override fun findAll(): MutableList<UserModel> {
         logAll()
         return users
     }
 
-    override fun findById(id: Long) : UserModel? {
+    override fun findById(id: Long): UserModel? {
         val foundUser: UserModel? = users.find { it.id == id }
         return foundUser
     }
@@ -43,14 +45,13 @@ class UserJSONStore(private val context: Context) : UserStore {
         serialize()
     }
 
-    override  fun update(user: UserModel) {
+    override fun update(user: UserModel) {
         val usersList = findAll() as ArrayList<UserModel>
         val foundUser: UserModel? = usersList.find { p -> p.id == user.id }
         if (foundUser != null) {
             foundUser.firstname = user.firstname
             foundUser.lastname = user.lastname
             foundUser.image = user.image
-
         }
         serialize()
     }
@@ -59,6 +60,7 @@ class UserJSONStore(private val context: Context) : UserStore {
         users.remove(user)
         serialize()
     }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(users, listType)
         write(context, JSON_FILE, jsonString)
@@ -68,11 +70,12 @@ class UserJSONStore(private val context: Context) : UserStore {
         val jsonString = read(context, JSON_FILE)
         users = gsonBuilder.fromJson(jsonString, listType)
     }
-    class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
+
+    class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
         override fun deserialize(
             json: JsonElement?,
             typeOfT: Type?,
-            context: JsonDeserializationContext?
+            context: JsonDeserializationContext?,
         ): Uri {
             return Uri.parse(json?.asString)
         }
@@ -80,7 +83,7 @@ class UserJSONStore(private val context: Context) : UserStore {
         override fun serialize(
             src: Uri?,
             typeOfSrc: Type?,
-            context: JsonSerializationContext?
+            context: JsonSerializationContext?,
         ): JsonElement {
             return JsonPrimitive(src.toString())
         }

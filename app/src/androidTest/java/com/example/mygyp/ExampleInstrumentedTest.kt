@@ -1,22 +1,43 @@
-package com.example.mygyp
-
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import com.example.mygyp.models.UserMemStore
+import com.example.mygyp.models.UserModel
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class UserMemStoreTest {
+    private lateinit var userStore: UserMemStore
+    private lateinit var testUser: UserModel
+
+    @Before
+    fun setUp() {
+        userStore = UserMemStore()
+        testUser = UserModel(id = 0, firstname = "John", lastname = "Doe", image = null)
+    }
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.mygyp", appContext.packageName)
+    fun testFindUserById() {
+        userStore.create(testUser)
+        val foundUser = userStore.findById(testUser.id)
+        assertNotNull("User should be found", foundUser)
+        assertEquals("Found user should match ", testUser.firstname, foundUser?.firstname)
+    }
+
+    @Test
+    fun testUpdateUser() {
+        userStore.create(testUser)
+        val updatedUser =
+            UserModel(id = testUser.id, firstname = "Jane", lastname = "lol", image = null)
+        userStore.update(updatedUser)
+        val foundUser = userStore.findById(testUser.id)
+        assertNotNull("Updated user should exist", foundUser)
+        assertEquals("Updated user's firstname should be 'JAN'", "JOE", foundUser?.firstname)
+
+        @Test
+        fun testDeleteUser() {
+            userStore.create(testUser)
+            assertNull("User should no longer exist", userStore.findById(testUser.id))
+        }
     }
 }

@@ -5,12 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Snackbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mygyp.R
 import com.example.mygyp.adapters.UserAdapter
@@ -19,12 +17,10 @@ import com.example.mygyp.databinding.ActivityPlacemarkListBinding
 import com.example.mygyp.main.MainApp
 import com.example.mygyp.models.UserModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.auth.User
 
 class UserListActivity : AppCompatActivity(), UserListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityPlacemarkListBinding
-
 
     /**
      * Called when the activity is starting. This is where most initialization should go:
@@ -53,6 +49,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
         binding.topAppBar.title = title // Name of the Project
         setSupportActionBar(binding.topAppBar)
     }
+
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -64,6 +61,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
         menuInflater.inflate(R.menu.menu_maion, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     /**
      * Handle menu item clicks.
      *
@@ -71,14 +69,25 @@ class UserListActivity : AppCompatActivity(), UserListener {
      * @return true if the menu item was handled successfully, false otherwise.
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
+            R.id.settings_menu -> {
+                // Start the Settings Activity
+                startActivity(Intent(this, SettingActivitvy::class.java))
+                true
+            }
             R.id.item_add -> {
-                val launcherIntent = Intent(this, UserActivity::class.java)
-                getResult.launch(launcherIntent)
+                // Start an activity or perform another action when the add button is pressed
+                // For example, start an Add User Activity
+                startActivity(Intent(this, UserActivity::class.java))
+                true
+            }
+            else -> {
+                // This ensures that any unexpected menu items are handled appropriately
+                super.onOptionsItemSelected(item)
             }
         }
-        return super.onOptionsItemSelected(item)
     }
+
     /**
      * Activity result launcher for handling results from starting activities for result.
      * This will be triggered when the activity launched by [registerForActivityResult]
@@ -102,6 +111,7 @@ class UserListActivity : AppCompatActivity(), UserListener {
                 ).show()
             }
         }
+
     /**
      * Handles the click event when a user item is clicked.
      *
@@ -118,6 +128,5 @@ class UserListActivity : AppCompatActivity(), UserListener {
     }
 
     override fun removeItem(user: UserModel) {
-
     }
 }

@@ -1,13 +1,11 @@
 package com.example.mygyp.main
 
 import android.app.Application
-import com.example.mygyp.models.UserJSONStore
-import com.example.mygyp.models.UserMemStore
-//import com.example.mygyp.models.UserFirebaseStore
+// import com.example.mygyp.models.UserFirebaseStore
 import com.example.mygyp.models.UserSQLStore
 import com.example.mygyp.models.UserStore
 import timber.log.Timber
-import timber.log.Timber.i
+
 /**
  * Custom Application class for initializing the application-wide components.
  */
@@ -17,6 +15,7 @@ class MainApp : Application() {
      *
      * */
     lateinit var users: UserStore
+
     /**
      * Called when the application is starting.
      *
