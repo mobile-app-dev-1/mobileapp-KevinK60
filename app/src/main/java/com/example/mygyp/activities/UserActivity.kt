@@ -27,6 +27,7 @@ class UserActivity : AppCompatActivity() {
     var user = UserModel()
     lateinit var app: MainApp
     var location = Location(52.245696, -7.139102, 15f)
+
     /**
      * Called when the activity is starting. This is where most initialization should go:
      * calling setContentView(int) to inflate the activity's UI, using findViewById(int)
@@ -107,7 +108,7 @@ class UserActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher, this)
         }
         registerImagePickerCallback()
 
@@ -119,6 +120,7 @@ class UserActivity : AppCompatActivity() {
         }
         registerMapCallback()
     }
+
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -132,6 +134,7 @@ class UserActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_placemark, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     /**
      * Handle menu item clicks.
      *
@@ -151,6 +154,7 @@ class UserActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     /**
      * Registers the callback for handling image picker results.
      *
@@ -176,6 +180,7 @@ class UserActivity : AppCompatActivity() {
                 }
             }
     }
+
     /**
      * Registers the callback for handling map activity results.
      *

@@ -43,15 +43,11 @@
 <!--            android:id="@+id/checkbox"-->
 <!--            android:layout_width="35dp"-->
 <!--            android:layout_height="65dp"-->
-<!--            android:text="" />-->
+<!--            android:text="" />--><![CDATA[
 
-        <Button
-            android:id="@+id/deletebutton"
-            android:layout_width="4dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onDeleteButtonClick" />/>
+        />
 
+    ]]>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -1,19 +1,19 @@
-//import com.example.mygyp.models.UserModel
-//import com.example.mygyp.models.UserStore
-//import com.google.firebase.firestore.FirebaseFirestore
-//import android.net.Uri
-//import timber.log.Timber
-//import kotlin.coroutines.resume
-//import kotlin.coroutines.resumeWithException
-//import kotlin.coroutines.suspendCoroutine
+// import com.example.mygyp.models.UserModel
+// import com.example.mygyp.models.UserStore
+// import com.google.firebase.firestore.FirebaseFirestore
+// import android.net.Uri
+// import timber.log.Timber
+// import kotlin.coroutines.resume
+// import kotlin.coroutines.resumeWithException
+// import kotlin.coroutines.suspendCoroutine
 //
-//class UserFirebaseStore : UserStore {
+// class UserFirebaseStore : UserStore {
 //
 //    private val db = FirebaseFirestore.getInstance()
 //    private val userDocuments = db.collection("users")
 //
 //    // Make findAll a suspend function
-//    suspend override fun findAll(): List<UserModel> = suspendCoroutine { continuation ->
+//     override fun findAll(): List<UserModel> = suspendCoroutine { continuation ->
 //        val usersList = mutableListOf<UserModel>()
 //
 //        userDocuments.get()
@@ -55,7 +55,7 @@
 //    }
 //
 //    // Make update a suspend function
-//    suspend override fun update(user: UserModel) {
+//     override fun update(user: UserModel) {
 //        val userReference = userDocuments.document(user.id.toString())
 //        userReference.set(user)
 //            .addOnSuccessListener {
@@ -66,7 +66,7 @@
 //            }
 //    }
 //
-//    suspend override fun findbyId(){}
+//     override fun findbyId(){}
 //    override fun delete(user: UserModel) {
 //        val userReference = userDocuments.document(user.id.toString())
 //        userReference.delete()
@@ -77,4 +77,4 @@
 //                Timber.e("Error deleting user: $e")
 //            }
 //    }
-//}
+// }

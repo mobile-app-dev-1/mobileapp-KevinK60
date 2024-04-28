@@ -23,9 +23,6 @@ class SettingActivitvy : AppCompatActivity() {
         binding = ActivitySettingActivitvyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.i(TAG, "Activity created and content view set")
-
-        // Initialize toggle button state
         binding.toggleButton.isChecked = getThemePreference()
 
         binding.toggleButton.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->

@@ -18,6 +18,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding
     private var location = Location()
+
     /**
      * Called when the activity is starting. This is where most initialization should go:
      * calling setContentView(int) to inflate the activity's UI, using findViewById(int)
@@ -42,6 +43,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
+
     /**
      * Called when the GoogleMap object is ready for use.
      *
@@ -66,6 +68,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     }
 
     override fun onMarkerDrag(p0: Marker) { }
+
     /**
      * Called when the user finishes dragging a marker on the map.
      *
@@ -79,6 +82,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
     }
+
     /**
      * Called when the user starts dragging a marker on the map.
      *
@@ -87,6 +91,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
      * @param p0 The marker that is being dragged.
      */
     override fun onMarkerDragStart(p0: Marker) { }
+
     /**
      * Called when the user presses the device's back button.
      *

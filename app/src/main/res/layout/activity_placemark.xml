@@ -96,9 +96,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:backgroundTint="?attr/colorSecondary"
+                    android:onClick="@onDeleteButtonClick"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:onClick="@onDeleteButtonClick" />
+                    android:text="@string/onDeleteButtonClick" />
 
                 <Button
                     android:id="@+id/btnAdd"
