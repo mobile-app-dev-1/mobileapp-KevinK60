@@ -27,7 +27,22 @@ class UserActivity : AppCompatActivity() {
     var user = UserModel()
     lateinit var app: MainApp
     var location = Location(52.245696, -7.139102, 15f)
-
+    /**
+     * Called when the activity is starting. This is where most initialization should go:
+     * calling setContentView(int) to inflate the activity's UI, using findViewById(int)
+     * to programmatically interact with widgets in the UI, and calling
+     * [AppCompatActivity.setSupportActionBar] to set up the app bar.
+     *
+     * This method initializes the activity's UI by inflating the layout, setting up the app bar,
+     * retrieving necessary data from the intent extras, and initializing the application instance.
+     * It also sets up a click listener for the delete button to prompt the user for confirmation
+     * before deleting the user.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [AppCompatActivity.onSaveInstanceState].
+     *     Note: Otherwise, it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -104,12 +119,29 @@ class UserActivity : AppCompatActivity() {
         }
         registerMapCallback()
     }
-
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     *
+     * This method inflates the menu resource file (menu_placemark) to populate the options menu
+     * in the app bar.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_placemark, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
+    /**
+     * Handle menu item clicks.
+     *
+     * This method is called when a menu item in the options menu is selected.
+     * It handles the action for the "Cancel" menu item by setting the result code to
+     * RESULT_CANCELED and finishing the activity.
+     *
+     * @param item The menu item that was selected.
+     * @return true if the menu item was handled successfully, false otherwise.
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> {
@@ -119,7 +151,13 @@ class UserActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
+    /**
+     * Registers the callback for handling image picker results.
+     *
+     * This method registers an activity result callback using ActivityResultContracts.StartActivityForResult
+     * to handle the result of the image picker activity. It updates the user's image based on the selected
+     * image URI and updates the UI accordingly.
+     */
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -127,7 +165,7 @@ class UserActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            user.image = result.data!!.data!!
+                            Picasso.get().load(user.image).into(binding.placemarkImage)
                             Picasso.get()
                                 .load(user.image)
                                 .into(binding.placemarkImage)
@@ -138,7 +176,13 @@ class UserActivity : AppCompatActivity() {
                 }
             }
     }
-
+    /**
+     * Registers the callback for handling map activity results.
+     *
+     * This method registers an activity result callback using ActivityResultContracts.StartActivityForResult
+     * to handle the result of the map activity. It updates the location data based on the selected location
+     * and updates the UI accordingly.
+     */
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

@@ -1,5 +1,6 @@
 
 <resources>
+    <color name="yellow">#FFFFFF</color>
     <color name="seed">#3489ff</color>
     <color name="md_theme_light_primary">#005CBC</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
