@@ -1,6 +1,8 @@
 import com.example.mygyp.models.UserMemStore
 import com.example.mygyp.models.UserModel
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 

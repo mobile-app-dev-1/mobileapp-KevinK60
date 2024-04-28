@@ -75,6 +75,12 @@ class UserListActivity : AppCompatActivity(), UserListener {
                 startActivity(Intent(this, SettingActivitvy::class.java))
                 true
             }
+            R.id.item_add -> {
+                // Start an activity or perform another action when the add button is pressed
+                // For example, start an Add User Activity
+                startActivity(Intent(this, UserActivity::class.java))
+                true
+            }
             else -> {
                 // This ensures that any unexpected menu items are handled appropriately
                 super.onOptionsItemSelected(item)
