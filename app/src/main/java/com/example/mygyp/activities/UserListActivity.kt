@@ -1,6 +1,5 @@
 package com.example.mygyp.activities
 
-import UserFirebaseStore
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Snackbar
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mygyp.R
@@ -37,25 +37,22 @@ class UserListActivity : AppCompatActivity(), UserListener {
      *     recently supplied in [AppCompatActivity.onSaveInstanceState].
      *     Note: Otherwise, it is null.
      */
-    class UserListActivity : AppCompatActivity(), UserListener {
-        private lateinit var app: MainApp
-        private lateinit var binding: ActivityPlacemarkListBinding
-        private lateinit var userStore: UserFirebaseStore
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Thread.sleep(2000)
+        installSplashScreen()
+        binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-            userStore = UserFirebaseStore()
-            app = application as MainApp
+        app = application as MainApp
 
-            val layoutManager = LinearLayoutManager(this)
-            binding.recyclerView.layoutManager = layoutManager
-            binding.recyclerView.adapter = UserAdapter(app.users.findAll(), this)
+        val layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.adapter = UserAdapter(app.users.findAll(), this)
 
-            binding.topAppBar.title = title // Name of the Project
-            setSupportActionBar(binding.topAppBar)
-        }
+        binding.topAppBar.title = title // Name of the Project
+        setSupportActionBar(binding.topAppBar)
+    }
     /**
      * Initialize the contents of the Activity's standard options menu.
      *

@@ -23,7 +23,7 @@ class UserMemStore : UserStore {
      *
      * @return A list of all user models stored in memory.
      */
-    override suspend fun findAll(): List<UserModel> {
+    override fun findAll(): List<UserModel> {
         return users
     }
     /**
@@ -41,7 +41,7 @@ class UserMemStore : UserStore {
      *
      * @param user The updated user model containing the new data.
      */
-    override suspend fun update(user: UserModel) {
+    override  fun update(user: UserModel) {
         val foundUser: UserModel? = users.find { it.id == user.id }
         if (foundUser != null) {
             foundUser.firstname = user.firstname

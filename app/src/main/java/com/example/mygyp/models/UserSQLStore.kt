@@ -24,7 +24,7 @@ class UserSQLStore(private val context: Context) : UserStore {
         database = UserDbHelper(context).writableDatabase
     }
 
-    override suspend fun findAll(): List<UserModel> {
+    override  fun findAll(): List<UserModel> {
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = database.rawQuery(query, null)
 
@@ -88,7 +88,7 @@ class UserSQLStore(private val context: Context) : UserStore {
     }
 
 
-    override suspend fun update(user: UserModel) {
+    override  fun update(user: UserModel) {
         val contentValues = ContentValues().apply {
             put(COLUMN_TITLE, user.firstname)
             put(COLUMN_DESCRIPTION, user.lastname)

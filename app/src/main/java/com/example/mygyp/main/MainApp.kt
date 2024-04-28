@@ -1,6 +1,5 @@
 package com.example.mygyp.main
 
-import UserFirebaseStore
 import android.app.Application
 import com.example.mygyp.models.UserJSONStore
 import com.example.mygyp.models.UserMemStore
@@ -27,7 +26,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        users = UserFirebaseStore()
+        users = UserSQLStore(applicationContext)
         Timber.i("Application started")
     }
 }
