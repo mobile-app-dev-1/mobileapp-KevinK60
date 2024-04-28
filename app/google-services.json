@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "82318183549",
+    "project_id": "gymcollections-15eed",
+    "storage_bucket": "gymcollections-15eed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82318183549:android:b2f38e61d063c45b337514",
+        "android_client_info": {
+          "package_name": "com.example.mygyp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdRUKxkbXi021Oe1Tl9_0AjMU1pB1R0Cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
