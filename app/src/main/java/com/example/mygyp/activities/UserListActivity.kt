@@ -1,16 +1,14 @@
 package com.example.mygyp.activities
 
+
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Snackbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mygyp.R
 import com.example.mygyp.adapters.UserAdapter
@@ -19,7 +17,7 @@ import com.example.mygyp.databinding.ActivityPlacemarkListBinding
 import com.example.mygyp.main.MainApp
 import com.example.mygyp.models.UserModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.auth.User
+
 
 class UserListActivity : AppCompatActivity(), UserListener {
     lateinit var app: MainApp
@@ -53,6 +51,10 @@ class UserListActivity : AppCompatActivity(), UserListener {
         binding.topAppBar.title = title // Name of the Project
         setSupportActionBar(binding.topAppBar)
     }
+
+
+
+
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -71,13 +73,24 @@ class UserListActivity : AppCompatActivity(), UserListener {
      * @return true if the menu item was handled successfully, false otherwise.
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, UserActivity::class.java)
                 getResult.launch(launcherIntent)
+                true
             }
+            R.id.settings_menu -> {
+                val settingsIntent = Intent(this, SettingActivitvy::class.java)
+                startActivity(settingsIntent)
+                true
+            }
+            R.id.settings_menu2 -> {
+//                val timesIntent = Intent(this, DaysListActivity::class.java)
+//                startActivity(timesIntent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
     /**
      * Activity result launcher for handling results from starting activities for result.
@@ -120,4 +133,6 @@ class UserListActivity : AppCompatActivity(), UserListener {
     override fun removeItem(user: UserModel) {
 
     }
+
+
 }
