@@ -1,16 +1,39 @@
-package com.example.mygyp
-
+import com.example.mygyp.models.UserMemStore
+import com.example.mygyp.models.UserModel
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Before
 import org.junit.Test
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
+class UserMemStoreTest {
+    private lateinit var userStore: UserMemStore
+    private lateinit var testUser: UserModel
+
+    @Before
+    fun setUp() {
+        userStore = UserMemStore()
+        testUser = UserModel(id = 0, firstname = "John", lastname = "Doe", image = null)
+    }
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun testFindUserById() {
+        userStore.create(testUser)
+        val foundUser = userStore.findById(testUser.id)
+        assertNotNull("User should be found", foundUser)
+        assertEquals("Found user should match ", testUser.firstname, foundUser?.firstname)
+    }
+
+    @Test
+    fun testUpdateUser() {
+        userStore.create(testUser)
+        val updatedUser =
+            UserModel(id = testUser.id, firstname = "Jane", lastname = "lol", image = null)
+        userStore.update(updatedUser)
+        val foundUser = userStore.findById(testUser.id)
+        assertNotNull("Updated user should exist", foundUser)
+        assertEquals("Updated user's firstname should be 'Jane'", "Jane", foundUser?.firstname)
+
+
     }
 }

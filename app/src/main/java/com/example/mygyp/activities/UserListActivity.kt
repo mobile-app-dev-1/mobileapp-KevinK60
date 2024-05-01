@@ -93,6 +93,8 @@ class UserListActivity : AppCompatActivity(), UserListener {
      * This will be triggered when the activity launched by [registerForActivityResult]
      * finishes and returns a result.
      */
+
+
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),

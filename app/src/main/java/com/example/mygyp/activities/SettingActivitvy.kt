@@ -28,10 +28,10 @@ class SettingActivitvy : AppCompatActivity() {
         binding.toggleButton.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             saveThemePreference(isChecked)
             Log.i(TAG, if (isChecked) "Switched to Dark Theme" else "Switched to Light Theme")
-            recreate() // Recreate the activity to apply the theme change
+            recreate()
         }
 
-        // Adjust padding based on system bars to handle insets
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

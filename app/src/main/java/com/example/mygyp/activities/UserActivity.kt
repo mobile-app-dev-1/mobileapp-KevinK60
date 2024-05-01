@@ -18,6 +18,7 @@ import com.example.mygyp.models.UserModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import timber.log.Timber.i
+import kotlin.concurrent.thread
 
 class UserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlacemarkBinding
@@ -98,6 +99,7 @@ class UserActivity : AppCompatActivity() {
                 }
                 setResult(RESULT_OK)
                 finish()
+
             } else {
                 Snackbar.make(
                     it,
@@ -108,7 +110,7 @@ class UserActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher, this)
+            showImagePicker(imageIntentLauncher)
         }
         registerImagePickerCallback()
 
@@ -167,19 +169,22 @@ class UserActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 when (result.resultCode) {
                     RESULT_OK -> {
-                        if (result.data != null) {
-                            i("Got Result ${result.data!!.data}")
-                            Picasso.get().load(user.image).into(binding.placemarkImage)
+                        val imageUri = result.data?.data
+                        if (imageUri != null) {
+                            i("Got Result $imageUri")
+                            user.image = imageUri
                             Picasso.get()
-                                .load(user.image)
+                                .load(imageUri)
                                 .into(binding.placemarkImage)
                             binding.chooseImage.setText(R.string.change_User_image)
                         }
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> { }
+                    else -> { }
                 }
             }
     }
+
 
     /**
      * Registers the callback for handling map activity results.
